@@ -1,0 +1,41 @@
+<div class="search">
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <form ng-submit="navigate(currentDomains[0])">
+        <input type="text" class="form-control" ng-model="query" ng-change="autoSearch()" placeholder="type here">
+        <div class="suggestion" ng-show="query.length > 2 && currentDomains[0]" ng-click="navigate(currentDomains[0])">{{currentDomains[0]}}<span class="suggestion-arrow"</span></div>
+      </form>
+    </div>
+    <div class="col-sm-2">
+      <button type="submit" class="form-control" ng-click="search()">Search</button>
+    </div>
+  </div>
+</div>
+
+<div class="row result">
+  <div ng-if="currentDomains.length == 0 && query">
+    -- no results found
+  </div>
+  <div class="list-group">
+    <a class="list-group-item" ng-repeat="domain in currentDomains" href="http://{{domain}}" target="_blank">{{domain}}</a>
+  </div>
+
+  <ul ng-if="pager.pages.length" class="pagination" style="cursor: pointer">
+      <li ng-class="{disabled:pager.currentPage === 1}">
+          <a ng-click="setPage(1)">First</a>
+      </li>
+      <li ng-class="{disabled:pager.currentPage === 1}">
+          <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+          <a ng-click="setPage(page)">{{page}}</a>
+      </li>
+      <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+          <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+      </li>
+      <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+          <a ng-click="setPage(pager.totalPages)">Last</a>
+      </li>
+  </ul>
+
+</div>
