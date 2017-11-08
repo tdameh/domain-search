@@ -3,7 +3,9 @@
     <div class="col-sm-10">
       <form ng-submit="navigate(currentDomains[0])">
         <input type="text" class="form-control" ng-model="query" ng-change="autoSearch()" placeholder="type here">
-        <div class="suggestion" ng-show="query.length > 2 && currentDomains[0]" ng-click="navigate(currentDomains[0])">{{currentDomains[0]}}<span class="suggestion-arrow"</span></div>
+        <div class="suggesstion-wrapper">
+          <div class="suggestion" ng-show="query.length > 2 && currentDomains[0]" ng-click="navigate(currentDomains[0])">{{currentDomains[0]}}<span class="suggestion-arrow"</span></div>
+        </div>
       </form>
     </div>
     <div class="col-sm-2">
@@ -16,6 +18,7 @@
   <div ng-if="currentDomains.length == 0 && query">
     -- no results found
   </div>
+  <div class="loading"><span ng-show="loading">loading ...</span></div>
   <div class="list-group">
     <a class="list-group-item" ng-repeat="domain in currentDomains" href="http://{{domain}}" target="_blank">{{domain}}</a>
   </div>

@@ -20,10 +20,12 @@ angular.module('clientApp')
     $scope.search = function() {
       var req = $http.get(API + '?q=' + $scope.query);
 
+      $scope.loading = true;
       req.then(function (res) {
         $scope.domains = res.data;
         $scope.pager = {};
         $scope.setPage(1);
+        $scope.loading = false;
       });
       req.catch(function (err) {
         $scope.error = err;
