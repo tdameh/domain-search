@@ -42,9 +42,12 @@ class Trie extends Node {
         node = node.children[str[0]];
         str = str.substr(1);
 
-        if (node && node.eow && !str) {
+        if (node.eow && !str) {
           result.push(prefix);
-          return false;
+   
+          if (node.children == {}) {
+            return false;
+          }
         }
       }
       return node;
